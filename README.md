@@ -3,7 +3,7 @@
 ![FPGA](https://img.shields.io/badge/Platform-Intel%20Cyclone%20V-blue)
 ![Language](https://img.shields.io/badge/Language-Verilog%20HDL-brightgreen)
 ![Resolution](https://img.shields.io/badge/Resolution-640x480%20%40%2060fps-orange)
-![License](https://img.shields.io/badge/License-MIT-green)
+![License](https://img.shields.io/badge/License-Apache2.0-green)
 
 A high-performance, real-time edge detection hardware accelerator built on an Intel Cyclone V FPGA (DE10-Nano development board). The system captures a live video stream from an **OV7670 camera module**, applies an optimized **Sobel filter algorithm** on-the-fly in hardware, and drives a live output display to an **HDMI monitor at 640x480 @ 60 FPS** with near-zero latency.
 
@@ -37,7 +37,7 @@ To generate a continuous $3 \times 3$ sliding window matrix from a sequential 1D
 * **Look-Ahead Read Addressing**: Predicts the next column address (`read_addr = col_count + 1`) to ensure data is fetched from BRAM synchronously with the clock cycle.
 * **Pixel Clamping Logic**: Automatically duplicates border pixels at the frame boundaries (`col_count == 0`, `col_count == 1`, `col_count == WIDTH - 1`) to preserve full $640 \times 480$ spatial resolution without border visual artifacts.
 
-### 2. Sobel Processing Engine (`sobel_calc.v`)
+### 2. Sobel Processing Engine (`sobel_convolution.v`)
 Calculates intensity gradients in parallel across a 3-stage arithmetic pipeline:
 * **Kernel Execution**:
   $$G_x = (p_{02} + 2 \cdot p_{12} + p_{22}) - (p_{00} + 2 \cdot p_{10} + p_{20})$$
