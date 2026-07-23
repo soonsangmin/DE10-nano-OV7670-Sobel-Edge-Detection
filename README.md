@@ -19,14 +19,14 @@ A high-performance, real-time edge detection hardware accelerator built on an In
 * **Ultra-Low Resource Footprint**: Consumes less than **1% of Logic Synthesis resources (ALMs)** on the Cyclone V board.
 
 ---
+```text
 +-----------+    Raw Pixel Stream    +-------------------+    3x3 Matrix    +------------------+    Edge Map    +-----------------+
 |  OV7670   | ---------------------> | Line Buffer Ctrl  | ---------------> |  Sobel Arithmetic| -------------> | HDMI Controller | ---> Monitor
 |  Camera   |  (pixel_in, enable)    | (2x BRAM + Shift) |    (p00..p22)    |     Pipeline     |  (pixel_out)   |   (640x480@60)  |
 +-----------+                        +-------------------+                  +------------------+                +-----------------+
-^                                                                                                                 ^
-|==================================== I2C / SCCB Config Master ===================================================|
-
-
+      ^                                                                                                                 ^
+      |==================================== I2C / SCCB Config Master ===================================================|
+```
 ---
 
 ## 🛠 Hardware Pipeline Breakdown
@@ -72,6 +72,3 @@ Synthesized on **Intel Cyclone V CSXFC6C6U23I7N (DE10-Nano)**:
 * **Software**: 
   * Intel Quartus Prime (Lite / Standard Edition v18.1 or later)
   * ModelSim / QuestaSim for Simulation
-## 📐 System Architecture
-
-The overall hardware structure forms a continuous pipeline connecting the CMOS camera directly to the HDMI output controller:
